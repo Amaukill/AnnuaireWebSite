@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "v9xreCVzS84YcC7HAjNgZN7fBArWTGh7z5dv1z4IGWAr3hO5Ia5sGNjTLUhzBjsf32bsGVAS+k9JarVu1yqvTw==",
+  "dgSpecHash": "5hPSlHs3ahbUkENvd8hG9AncjbuXcbCcHSzpobEyJ8rN+wSwlfuxfXHx6fmed+axhgRNWbL7VOULe8yAIe3sMQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\a.dupont\\source\\repos\\AnnuaireWebSite\\AnnuaireWebSite\\AnnuaireWebSite.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\a.dupont\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -1,7 +1,68 @@
 ﻿@page "/"
+@inject ContactController contactController 
+<div>
+    <EditForm Model="@contact" OnValidSubmit="@HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
 
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
-
-<SurveyPrompt Title="How is Blazor working for you?" />
+        <InputText id="first" @bind-Value="contact.First" />
+        <InputText id="last" @bind-Value="contact.Last" />
+        <InputText id="city" @bind-Value="contact.City" />
+        <InputText id="street" @bind-Value="contact.Street" />
+        <InputNumber id="zip" @bind-Value="contact.Zip" />
+        <button type="submit">Submit</button>
+    </EditForm>
+    @if( contactController.contacts != null)
+    {
+        foreach(Contact contact in contactController.contacts) 
+        {
+            <div>
+                <table>
+                    <tr>
+                        <td>
+                            Prénom
+                        </td>
+                        <td>
+                            Nom
+                        </td>
+                        <td>
+                            Ville
+                        </td>
+                        <td>
+                            Rue
+                        </td>
+                        <td>
+                            Code Postale
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @contact.First
+                        </td>
+                        <td>
+                            @contact.Last
+                        </td>
+                        <td>
+                            @contact.City
+                        </td>
+                        <td>
+                            @contact.Street
+                        </td>
+                        <td>
+                            @contact.Zip
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        }
+            
+    }
+</div>
+@code{ 
+    private Contact contact = new Contact();
+    private async Task HandleValidSubmit()
+    {
+      await contactController.GetContactsByParameters(contact.First, contact.Last, contact.City, contact.Street, contact.Zip);
+        StateHasChanged();
+    }
+}

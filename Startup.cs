@@ -1,3 +1,4 @@
+using AnnuaireWebSite.Controller;
 using AnnuaireWebSite.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
@@ -28,7 +29,10 @@ namespace AnnuaireWebSite
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
+            services.AddHttpClient();
+            services.AddSingleton<ContactController>();
+            services.AddScoped<ContactController>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

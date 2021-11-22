@@ -75,6 +75,27 @@ using AnnuaireWebSite.Shared;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 10 "C:\Users\a.dupont\source\repos\AnnuaireWebSite\AnnuaireWebSite\_Imports.razor"
+using AnnuaireWebSite.Controller;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 11 "C:\Users\a.dupont\source\repos\AnnuaireWebSite\AnnuaireWebSite\_Imports.razor"
+using AnnuaireWebSite.Data;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 12 "C:\Users\a.dupont\source\repos\AnnuaireWebSite\AnnuaireWebSite\_Imports.razor"
+using AnnuaireWebSite.Model;
+
+#line default
+#line hidden
+#nullable disable
     public partial class _Imports : System.Object
     {
         #pragma warning disable 1998

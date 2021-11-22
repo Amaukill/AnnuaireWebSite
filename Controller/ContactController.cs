@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AnnuaireWebSite.Data;
+using AnnuaireWebSite.Model;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace AnnuaireWebSite.Controller
 {
-    public class ContactController : Controller
+    public class ContactController : ControllerBase
     {
-        public IActionResult Index()
+        public List<Contact> contacts { get; set; }
+        public async Task GetContactsByParameters(string first = null ,string last = null , string street =null , string city=null , int? zip=null)
         {
-            return View();
+            contacts = await Api.GetContactsByParameters( first ,  last ,  street ,  city ,  zip) ;
         }
     }
 }

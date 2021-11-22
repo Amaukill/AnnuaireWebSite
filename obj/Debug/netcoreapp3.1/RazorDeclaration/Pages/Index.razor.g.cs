@@ -75,6 +75,27 @@ using AnnuaireWebSite.Shared;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 10 "C:\Users\a.dupont\source\repos\AnnuaireWebSite\AnnuaireWebSite\_Imports.razor"
+using AnnuaireWebSite.Controller;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 11 "C:\Users\a.dupont\source\repos\AnnuaireWebSite\AnnuaireWebSite\_Imports.razor"
+using AnnuaireWebSite.Data;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 12 "C:\Users\a.dupont\source\repos\AnnuaireWebSite\AnnuaireWebSite\_Imports.razor"
+using AnnuaireWebSite.Model;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/")]
     public partial class Index : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -83,6 +104,20 @@ using AnnuaireWebSite.Shared;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 61 "C:\Users\a.dupont\source\repos\AnnuaireWebSite\AnnuaireWebSite\Pages\Index.razor"
+       
+    private Contact contact = new Contact();
+    private async Task HandleValidSubmit()
+    {
+      await contactController.GetContactsByParameters(contact.First, contact.Last, contact.City, contact.Street, contact.Zip);
+        StateHasChanged();
+    }
+
+#line default
+#line hidden
+#nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private ContactController contactController { get; set; }
     }
 }
 #pragma warning restore 1591
