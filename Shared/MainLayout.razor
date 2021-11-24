@@ -1,11 +1,14 @@
 ﻿@inherits LayoutComponentBase
+@inject ContactController contactController
 
+<div class="main vh-100 vw-100">
 
-<div class="main vh-100 vw-100" >
-    
-        @Body
-   
+    @Body
+
 </div>
-@{ 
-    Api.InitializeClient();
+@code{ 
+    protected override async void OnInitialized()
+    {
+        Api.InitializeClient();
+    }
 }

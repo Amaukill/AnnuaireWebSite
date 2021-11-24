@@ -7,10 +7,7 @@
 namespace AnnuaireWebSite
 {
     #line hidden
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Components;
 #nullable restore
 #line 1 "C:\Users\a.dupont\source\repos\AnnuaireWebSite\AnnuaireWebSite\_Imports.razor"
@@ -92,6 +89,34 @@ using AnnuaireWebSite.Data;
 #nullable restore
 #line 12 "C:\Users\a.dupont\source\repos\AnnuaireWebSite\AnnuaireWebSite\_Imports.razor"
 using AnnuaireWebSite.Model;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 13 "C:\Users\a.dupont\source\repos\AnnuaireWebSite\AnnuaireWebSite\_Imports.razor"
+using System;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 14 "C:\Users\a.dupont\source\repos\AnnuaireWebSite\AnnuaireWebSite\_Imports.razor"
+using System.Linq;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 15 "C:\Users\a.dupont\source\repos\AnnuaireWebSite\AnnuaireWebSite\_Imports.razor"
+using System.Threading.Tasks;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 16 "C:\Users\a.dupont\source\repos\AnnuaireWebSite\AnnuaireWebSite\_Imports.razor"
+using Blazored.LocalStorage;
 
 #line default
 #line hidden

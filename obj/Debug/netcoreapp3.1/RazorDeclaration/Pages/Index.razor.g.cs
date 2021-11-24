@@ -7,10 +7,7 @@
 namespace AnnuaireWebSite.Pages
 {
     #line hidden
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Components;
 #nullable restore
 #line 1 "C:\Users\a.dupont\source\repos\AnnuaireWebSite\AnnuaireWebSite\_Imports.razor"
@@ -96,6 +93,34 @@ using AnnuaireWebSite.Model;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 13 "C:\Users\a.dupont\source\repos\AnnuaireWebSite\AnnuaireWebSite\_Imports.razor"
+using System;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 14 "C:\Users\a.dupont\source\repos\AnnuaireWebSite\AnnuaireWebSite\_Imports.razor"
+using System.Linq;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 15 "C:\Users\a.dupont\source\repos\AnnuaireWebSite\AnnuaireWebSite\_Imports.razor"
+using System.Threading.Tasks;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 16 "C:\Users\a.dupont\source\repos\AnnuaireWebSite\AnnuaireWebSite\_Imports.razor"
+using Blazored.LocalStorage;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/")]
     public partial class Index : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -105,18 +130,55 @@ using AnnuaireWebSite.Model;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 61 "C:\Users\a.dupont\source\repos\AnnuaireWebSite\AnnuaireWebSite\Pages\Index.razor"
-       
+#line 124 "C:\Users\a.dupont\source\repos\AnnuaireWebSite\AnnuaireWebSite\Pages\Index.razor"
+      
     private Contact contact = new Contact();
+    private int nblist = 20;
+    private int page = 0;
+    private int actualPage = 0;
+    protected override async void OnInitialized()
+    {
+        StateHasChanged();
+    }
     private async Task HandleValidSubmit()
     {
-      await contactController.GetContactsByParameters(contact.First, contact.Last, contact.City, contact.Street, contact.Zip);
+        if (contactController.contactsParam != null)
+        {
+            contactController.contactsParam.Clear();
+        }
+        await Task.Run(() => contactController.GetContactsByParameters(contact.First, contact.Last, contact.City, contact.Street, contact.Zip));
+        await Save();
+        page = contactController.contactsParam.Count() / 20;
+        actualPage = 0;
+        StateHasChanged();
+    }
+    private void Changelist(ChangeEventArgs e)
+    {
+        actualPage = Convert.ToInt32(e.Value.ToString());
+        StateHasChanged();
+    }
+    public async Task Save()
+    {
+        await ls.SetItemAsync("recherche", contactController.contactsParam);
+
+    }
+    public async Task Read()
+    {
+        contactController.contactsParam = await ls.GetItemAsync<List<Contact>>("recherche");
+        page = contactController.contactsParam.Count() / 20;
+        actualPage = 0;
+        StateHasChanged();
+    }
+    public void Delete()
+    {
+        contactController.contactsParam.Clear();
         StateHasChanged();
     }
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private Blazored.LocalStorage.ILocalStorageService ls { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private ContactController contactController { get; set; }
     }
 }

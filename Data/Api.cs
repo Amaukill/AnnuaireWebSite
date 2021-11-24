@@ -27,27 +27,44 @@ namespace AnnuaireWebSite.Data
             ApiClient.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
 
         }
-        public static async Task<List<Contact>>  GetContactsByParameters(string first = null , string last = null, string street = null, string city = null, int? zip = null)
+        public static async Task<List<Contact>> GetContactsByParameters(string first = null, string last = null, string street = null, string city = null, int? zip = null)
         {
             NameValueCollection query = HttpUtility.ParseQueryString(string.Empty);
-            
+
             if (first != null)
             {
                 query["first"] = first;
             }
-            if(last != null)
+            if (last != null)
             {
                 query["last"] = last;
             }
-            if (street != null) 
+            if (city != null)
             {
                 query["city"] = city;
             }
-            if (zip != null)
+            if (street != null)
+            {
+                query["street"] = street;
+            }
+            if (zip != null || zip != 0)
             {
                 query["zip"] = zip.ToString(); ;
             }
-            using (HttpResponseMessage response = await ApiClient.GetAsync($"{ApiCall}/GetContactsByParameters?{query}"))
+            using (HttpResponseMessage response = await ApiClient.GetAsync($"{ApiCall}/Contact/GetContactsByParameters?{query}"))
+            {
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+
+                return JsonConvert.DeserializeObject<List<Contact>>(await response.Content.ReadAsStringAsync());
+            }
+        }
+        public static async Task<List<Contact>> GetContacts()
+        {
+
+            using (HttpResponseMessage response = await ApiClient.GetAsync($"{ApiCall}/Contact/GetAllContacts"))
             {
                 if (!response.IsSuccessStatusCode)
                 {

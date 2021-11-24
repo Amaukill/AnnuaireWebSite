@@ -1,68 +1,173 @@
 ﻿@page "/"
-@inject ContactController contactController 
-<div>
-    <EditForm Model="@contact" OnValidSubmit="@HandleValidSubmit">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
+@inject ContactController contactController
+@inject Blazored.LocalStorage.ILocalStorageService ls
+<div class="d-flex flex-column align-items-center">
+    <h1> Annuaire </h1>
+    <form class="w-50">
+        <EditForm Model="@contact" OnValidSubmit="@HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="form-group">
+                <label for="first">Prénom</label>
+                <InputText id="first" class="form-control" @bind-Value="contact.First" />
+            </div>
+            <div class="form-group">
+                <label for="last">Nom</label>
+                <InputText id="last" class="form-control" @bind-Value="contact.Last" />
+            </div>
+            <div class="form-group">
+                <label for="city">Ville</label>
+                <InputText id="city" class="form-control" @bind-Value="contact.City" />
+            </div>
+            <div class="form-group">
+                <label for="street">Rue</label>
+                <InputText id="street" class="form-control" @bind-Value="contact.Street" />
+            </div>
+            <div class="form-group">
+                <label for="zip">ZIP</label>
+                <InputNumber id="zip" class="form-control" @bind-Value="contact.Zip" />
+            </div>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </EditForm>
+    </form>
 
-        <InputText id="first" @bind-Value="contact.First" />
-        <InputText id="last" @bind-Value="contact.Last" />
-        <InputText id="city" @bind-Value="contact.City" />
-        <InputText id="street" @bind-Value="contact.Street" />
-        <InputNumber id="zip" @bind-Value="contact.Zip" />
-        <button type="submit">Submit</button>
-    </EditForm>
-    @if( contactController.contacts != null)
+    @if (contactController.contactsParam != null)
     {
-        foreach(Contact contact in contactController.contacts) 
+        if (contactController.contactsParam.Count != 0)
         {
+            <h1> Recherche</h1>
+            <h1> Résultats </h1>
+
             <div>
-                <table>
-                    <tr>
-                        <td>
-                            Prénom
-                        </td>
-                        <td>
-                            Nom
-                        </td>
-                        <td>
-                            Ville
-                        </td>
-                        <td>
-                            Rue
-                        </td>
-                        <td>
-                            Code Postale
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            @contact.First
-                        </td>
-                        <td>
-                            @contact.Last
-                        </td>
-                        <td>
-                            @contact.City
-                        </td>
-                        <td>
-                            @contact.Street
-                        </td>
-                        <td>
-                            @contact.Zip
-                        </td>
-                    </tr>
+
+                <table class="table w-100">
+                    <thead class="thead-dark">
+                        <tr>
+                            <td scope="col">
+                                nb
+                            </td>
+                            <td scope="col">
+                                Prénom
+                            </td>
+                            <td scope="col">
+                                Nom
+                            </td>
+                            <td scope="col">
+                                Ville
+                            </td>
+                            <td scope="col">
+                                Rue
+                            </td>
+                            <td scope="col">
+                                Code Postale
+                            </td>
+                        </tr>
+                    </thead>
+
+                    @for (int i = 0; i < 20; i++)
+                    {
+
+
+                        <tr>
+                            <td>
+                                @(nblist * actualPage + i)
+                            </td>
+                            <td>
+                                @contactController.contactsParam[nblist * actualPage + i].First
+                            </td>
+                            <td>
+                                @contactController.contactsParam[nblist * actualPage + i].Last
+                            </td>
+                            <td>
+                                @contactController.contactsParam[nblist * actualPage + i].City
+                            </td>
+                            <td>
+                                @contactController.contactsParam[nblist * actualPage + i].Street
+                            </td>
+                            <td>
+                                @contactController.contactsParam[nblist * actualPage + i].Zip
+                            </td>
+                        </tr>
+
+                    }
+
                 </table>
+
             </div>
         }
-            
+        else
+        {
+            <div>
+                <h2> Aucun Résultat</h2>
+            </div>
+        }
     }
+    @if (contactController.contactsParam != null)
+    {
+        if (contactController.contactsParam.Count != 0)
+        {
+
+            <select class="align-self-center mb-4" @onchange="Changelist">
+                @for (int i = 0; i < page; i++)
+                {
+
+                    <option value=@i>@i</option>
+                }
+            </select>
+        }
+    }
+    <div>
+        <button class="btn btn-primary" @onclick="Read">Dernière recherche </button>
+        <button class="btn btn-primary" @onclick="Delete">Effacer </button>
+    </div>
 </div>
-@code{ 
+@code{
     private Contact contact = new Contact();
+    private int nblist = 20;
+    private int page = 0;
+    private int actualPage = 0;
+    protected override async void OnInitialized()
+    {
+        StateHasChanged();
+    }
+    // recherche en fonction du formulaire 
     private async Task HandleValidSubmit()
     {
-      await contactController.GetContactsByParameters(contact.First, contact.Last, contact.City, contact.Street, contact.Zip);
+        if (contactController.contactsParam != null)
+        {
+            contactController.contactsParam.Clear();
+        }
+        await Task.Run(() => contactController.GetContactsByParameters(contact.First, contact.Last, contact.City, contact.Street, contact.Zip));
+        await Save();
+        page = contactController.contactsParam.Count() / 20;
+        actualPage = 0;
+        StateHasChanged();
+    }
+    //change les pages
+    private void Changelist(ChangeEventArgs e)
+    {
+        actualPage = Convert.ToInt32(e.Value.ToString());
+        StateHasChanged();
+    }
+    // sauvegarde dans le cache
+    public async Task Save()
+    {
+        await ls.SetItemAsync("recherche", contactController.contactsParam);
+
+    }
+    //applique la dernière recherche effectué
+    public async Task Read()
+    {
+        contactController.contactsParam = await ls.GetItemAsync<List<Contact>>("recherche");
+        page = contactController.contactsParam.Count() / 20;
+        actualPage = 0;
+        StateHasChanged();
+    }
+    // vide la liste de recherche
+    public void Delete()
+    {
+        contactController.contactsParam.Clear();
         StateHasChanged();
     }
 }
+

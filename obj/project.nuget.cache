@@ -1,10 +1,26 @@
 {
   "version": 2,
-  "dgSpecHash": "5hPSlHs3ahbUkENvd8hG9AncjbuXcbCcHSzpobEyJ8rN+wSwlfuxfXHx6fmed+axhgRNWbL7VOULe8yAIe3sMQ==",
+  "dgSpecHash": "I2KT3MJNo9PnNf30QgnN2tea2TlVgk8Tdz5dCePwu7BWzG/Ny+VVwlrd3TFJTOw2caEWOdbMJGfnZTRPWVtTFA==",
   "success": true,
   "projectFilePath": "C:\\Users\\a.dupont\\source\\repos\\AnnuaireWebSite\\AnnuaireWebSite\\AnnuaireWebSite.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\a.dupont\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+    "C:\\Users\\a.dupont\\.nuget\\packages\\blazored.localstorage\\4.1.5\\blazored.localstorage.4.1.5.nupkg.sha512",
+    "C:\\Users\\a.dupont\\.nuget\\packages\\blazored.sessionstorage\\1.0.12\\blazored.sessionstorage.1.0.12.nupkg.sha512",
+    "C:\\Users\\a.dupont\\.nuget\\packages\\microsoft.aspnetcore.authorization\\3.1.14\\microsoft.aspnetcore.authorization.3.1.14.nupkg.sha512",
+    "C:\\Users\\a.dupont\\.nuget\\packages\\microsoft.aspnetcore.components\\3.1.14\\microsoft.aspnetcore.components.3.1.14.nupkg.sha512",
+    "C:\\Users\\a.dupont\\.nuget\\packages\\microsoft.aspnetcore.components.analyzers\\3.1.14\\microsoft.aspnetcore.components.analyzers.3.1.14.nupkg.sha512",
+    "C:\\Users\\a.dupont\\.nuget\\packages\\microsoft.aspnetcore.components.forms\\3.1.14\\microsoft.aspnetcore.components.forms.3.1.14.nupkg.sha512",
+    "C:\\Users\\a.dupont\\.nuget\\packages\\microsoft.aspnetcore.components.web\\3.1.14\\microsoft.aspnetcore.components.web.3.1.14.nupkg.sha512",
+    "C:\\Users\\a.dupont\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly.server\\6.0.0\\microsoft.aspnetcore.components.webassembly.server.6.0.0.nupkg.sha512",
+    "C:\\Users\\a.dupont\\.nuget\\packages\\microsoft.aspnetcore.metadata\\3.1.14\\microsoft.aspnetcore.metadata.3.1.14.nupkg.sha512",
+    "C:\\Users\\a.dupont\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\3.1.14\\microsoft.extensions.dependencyinjection.3.1.14.nupkg.sha512",
+    "C:\\Users\\a.dupont\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\3.1.14\\microsoft.extensions.dependencyinjection.abstractions.3.1.14.nupkg.sha512",
+    "C:\\Users\\a.dupont\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.1.14\\microsoft.extensions.logging.abstractions.3.1.14.nupkg.sha512",
+    "C:\\Users\\a.dupont\\.nuget\\packages\\microsoft.extensions.options\\3.1.14\\microsoft.extensions.options.3.1.14.nupkg.sha512",
+    "C:\\Users\\a.dupont\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.14\\microsoft.extensions.primitives.3.1.14.nupkg.sha512",
+    "C:\\Users\\a.dupont\\.nuget\\packages\\microsoft.jsinterop\\3.1.14\\microsoft.jsinterop.3.1.14.nupkg.sha512",
+    "C:\\Users\\a.dupont\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\a.dupont\\.nuget\\packages\\protectedbrowserstorage.netstandard\\1.1.2\\protectedbrowserstorage.netstandard.1.1.2.nupkg.sha512"
   ],
   "logs": []
 }
